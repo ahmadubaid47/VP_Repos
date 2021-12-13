@@ -1,0 +1,34 @@
+CREATE Procedure [dbo].[SP_empInsert]
+
+@emp_id int,
+@emp_frst_name VARCHAR(50),
+@emp_lst_name VARCHAR(50),
+@emp_age VARCHAR(50),
+@emp_gender VARCHAR(50),
+@emp_ph VARCHAR(50),
+@emp_cod VARCHAR(50),
+@emp_DOB VARCHAR(50),
+@emp_Nationality VARCHAR(50)
+AS
+INSERT INTO dbo.emp_AhmadUbaid21_db values (@emp_id ,@emp_frst_name,@emp_lst_name, @emp_age,@emp_gender,@emp_ph,@emp_cod,@emp_DOB,@emp_Nationality)
+return 0
+
+protected void btnInsert_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(connstr);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("dbo.SP_empInsert", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@emp_id", TextBox1.Text));
+            cmd.Parameters.Add(new SqlParameter("@emp_frst_name", TextBox2.Text));
+            cmd.Parameters.Add(new SqlParameter("@emp_lst_name", TextBox3.Text));
+            cmd.Parameters.Add(new SqlParameter("@emp_age", TextBox4.Text));
+            cmd.Parameters.Add(new SqlParameter("@emp_gender", TextBox5.Text));
+            cmd.Parameters.Add(new SqlParameter("@emp_ph", TextBox6.Text));
+            cmd.Parameters.Add(new SqlParameter("@emp_cod", TextBox7.Text));
+            cmd.Parameters.Add(new SqlParameter("emp_DOB", TextBox8.Text));
+            cmd.Parameters.Add(new SqlParameter("@emp_Nationality", TextBox9.Text));
+            cmd.ExecuteNonQuery();
+            Response.Write("<script>alert('Inserted')</script>");
+
+        }
