@@ -1,0 +1,29 @@
+public static string connectionString=@"Data Source=(localdb)\v11.0;Initial Catalog=Records;Integrated Security=True";
+        private SqlDataAdapter dataAdapter;
+        private DataSet dataSet1;
+        private DataTable dataTable;
+        
+        public Form2()
+        {
+            InitializeComponent();
+            string commandstring = "select * from Prd";
+
+            dataAdapter = new SqlDataAdapter(commandstring, connectionString);
+            dataSet1 = new DataSet();
+            dataSet1.CaseSensitive = true;
+            dataAdapter.Fill(dataSet1, "Prd");
+
+            dataTable = dataSet1.Tables["Prd"];
+            reportViewer1.Visible = true;
+            reportViewer1.LocalReport.ReportPath = "Report2.rdlc";
+            reportViewer1.LocalReport.DataSources.Clear();
+            reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("ds", dataTable));
+        }
+
+
+        private void reportViewer1_Load(object sender, EventArgs e)
+        {
+            this.reportViewer1.RefreshReport();
+        }
+    }
+}

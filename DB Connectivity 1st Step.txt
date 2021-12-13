@@ -1,0 +1,27 @@
+protected void btnInsert_Click(object sender, EventArgs e)
+{
+   string Code = txtCode.Text;
+   string Name = txtName.Text;
+   string CellNum = txtCellNum.Text;
+   string Address = txtAddress.Text;
+
+    SqlConnection conn = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=UniRecords;Integrated Security=True;User Instance=True");
+
+    string query = "INSERT INTO Employee VALUES('"+Code+"','"+Name+"','"+CellNum+"','"+Address+"')";
+
+    try
+    {
+        conn.Open();
+        SqlCommand cmd = new SqlCommand(query, conn);
+	cmd.ExecuteNonQuery();
+	MessageBox.Show("Record Inserted Successfully");
+    }
+    catch(SqlException ex)
+    {
+	MessageBox.Show("Exception:"+ex.Message);
+    }
+    finally
+    {
+        conn.Close();
+    }
+}

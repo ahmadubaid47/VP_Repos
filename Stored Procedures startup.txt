@@ -1,0 +1,26 @@
+private void btnInsert_Click()
+{
+	SqlConnection conn = new SqlConnection(connstr))
+        conn.Open();
+        SqlCommand cmd = new SqlCommand("dbo.SP_empInsert", conn);
+        cmd.Parameters.Add(new SqlParameter("@empCode", Convert.ToInt32(txtCode.Text)));
+        cmd.Parameters.Add(new SqlParameter("@empoName", txtName.Text));
+        cmd.Parameters.Add(new SqlParameter("@empCellNum", txtCellNum.Text));
+        cmd.Parameters.Add(new SqlParameter("@empAddress", txtAddress.Text));
+        cmd.ExecuteNonQuery();
+	MessageBox.Show("Inserted");
+}
+
+
+
+
+CREATE Procedure [dbo].[SP_empInsert]
+
+@empCode int,
+@empName VARCHAR(50),
+@empCellNum VARCHAR(50),
+@empAddress VARCHAR(50),
+AS
+INSERT INTO Employee values (@empCode,@empName,@empCellNum,@empAddress)
+return 0 //END
+
